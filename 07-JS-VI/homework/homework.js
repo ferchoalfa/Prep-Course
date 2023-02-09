@@ -4,17 +4,29 @@ function mayuscula(nombre) {
   //La función recibe un nombre y debe devolver el mismo que recibe pero con su primer letra en mayúscula
   //ej: Recibe "mario" ----> Devuelve "Mario"
   //Tu código:
+
+  var corte = nombre.split('');
+  var parteEnMinuscula = [];
+  for (var i = 1; i<corte.length; i++){
+    parteEnMinuscula.push(corte[i])
+  }
+  function fusion (acumu,elemento){
+    return acumu + elemento;
+  }
+  return corte[0].toUpperCase() + parteEnMinuscula.reduce(fusion);
 }
 
 function invocarCallback(cb) {
   // Invoca al callback `cb`
   //Tu código:
+  cb();
 }
 
 function operacionMatematica(n1, n2, cb) {
   //Vamos a recibir una función que realiza una operación matemática como callback junto con dos números.
   //Devolver el callback pasándole como argumentos los números recibidos.
   //Tu código:
+  return cb(n1,n2)
 }
 
 function sumarArray(numeros, cb) {
@@ -22,12 +34,23 @@ function sumarArray(numeros, cb) {
   // Pasa el resultado a `cb`
   // No es necesario devolver nada
   //Tu código:
+  function suma (a,b){
+    return a + b;
+  }
+  var resultado = numeros.reduce(suma);
+  cb(resultado);
 }
 
 function forEach(array, cb) {
   // Itera sobre la matriz "array" y pasa los valores al callback uno por uno
   // Pista: Estarás invocando a `cb` varias veces (una por cada valor en la matriz)
   //Tu código:
+  array.forEach(function(elemento){
+    cb(elemento);
+  /* Otra forma de realizar este ejercicio es a través del ciclo for *//*
+  for(var i = 0; i<array.length; i++){
+    cb(array[i]);*/
+  });
 }
 
 function map(array, cb) {
@@ -35,12 +58,37 @@ function map(array, cb) {
   // Itera sobre cada valor en "array", pásalo a `cb` y luego ubicar el valor devuelto por `cb` en un nuevo array
   // El nuevo array debe tener la misma longitud que el array del argumento
   //Tu código:
+  var newArray = [];
+  array.forEach(function(elemento){
+    newArray.push(cb(elemento));
+  });
+  return newArray;
 }
 
 function filter(array) {
   //Filtrar todos los elementos del array que comiencen con la letra "a".
   //Devolver un nuevo array con los elementos que cumplen la condición
   //Tu código:
+  /* MI SOLUCIÓN */
+  var newArray =[];
+  for (var i = 0; i<array.length; i++){
+    var palabra = [];
+    palabra = array[i].split('');
+    if (palabra[0]==='a'){
+      newArray.push(array[i]);
+    }
+  }
+  return newArray;
+  /* SOLUCIÓN DEL PROFE *//*
+  
+  var nuevoArray = [];
+  for(let i = 0; i<array.length; i++) {
+    if(array[i][0] === "a") {
+      nuevoArray.push(array[i])
+    }
+  }
+  return nuevoArray;
+}*/
 }
 
 // No modificar nada debajo de esta línea
